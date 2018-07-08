@@ -13,7 +13,7 @@ def generate_msg(key, plaintext):
     ciphertext = cipher.encrypt(plaintext)
     hasher = HMAC.new(key, ciphertext, SHA256)
     hash = hasher.hexdigest() 
-    msg = hash + nonce + ciphertext
+    msg = str(hash + nonce + ciphertext)
 
     return msg
 
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     print "Wait 1 second"
     time.sleep(1)
 
-    # Fake Key
+    # Not Valid Value
     msg = generate_msg(key, '09809098')
-    print "Send Fake Key Light On Message"
+    print "Send Not Valid Message"
     publish.single("things/1/light", msg, hostname="localhost")
