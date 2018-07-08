@@ -47,4 +47,5 @@ def on_message_light(client, userdata, message):
     print
 
 if __name__ == "__main__":
-    subscribe.callback(on_message_light, "things/1/light", hostname="localhost")
+    hostname = "localhost"
+    subscribe.callback(on_message_light, "things/1/light", hostname=hostname)

@@ -18,13 +18,14 @@ def generate_msg(key, plaintext):
     return msg
 
 if __name__ == "__main__":
+    hostname = "localhost"
     key = "Sixteen byte key"
     expired_nonce = get_nonce()
 
     # Light Off
     msg = generate_msg(key, '0')
     print "Send Authentic Light Off Message"
-    publish.single("things/1/light", msg, hostname="localhost")
+    publish.single("things/1/light", msg, hostname=hostname)
 
     # Wait for 1 second
     print "Wait 1 second"
@@ -33,7 +34,7 @@ if __name__ == "__main__":
     # Light On
     msg = generate_msg(key, '1')
     print "Send Authentic Light On Message"
-    publish.single("things/1/light", msg, hostname="localhost")
+    publish.single("things/1/light", msg, hostname=hostname)
 
     # Wait for 1 second
     print "Wait 1 second"
@@ -43,7 +44,7 @@ if __name__ == "__main__":
     fake_key = "Sixteen byte keo"
     msg = generate_msg(fake_key, '1')
     print "Send Fake Key Light On Message"
-    publish.single("things/1/light", msg, hostname="localhost")
+    publish.single("things/1/light", msg, hostname=hostname)
 
     # Wait for 1 second
     print "Wait 1 second"
@@ -56,7 +57,7 @@ if __name__ == "__main__":
     hash = hasher.hexdigest() 
     msg = hash + expired_nonce + ciphertext
     print "Send Expired Nonce Light Off Message"
-    publish.single("things/1/light", msg, hostname="localhost")
+    publish.single("things/1/light", msg, hostname=hostname)
 
     # Wait for 1 second
     print "Wait 1 second"
@@ -65,4 +66,4 @@ if __name__ == "__main__":
     # Not Valid Value
     msg = generate_msg(key, '09809098')
     print "Send Not Valid Message"
-    publish.single("things/1/light", msg, hostname="localhost")
+    publish.single("things/1/light", msg, hostname=hostname)
